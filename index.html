@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Sensor Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Real-Time Sensor Data</h1>
+    </header>
+
+    <div class="data-container" id="sensor-data">
+        <div class="data-item">
+            <span class="label">Temperature (°C):</span> <span id="temperature-celsius">Loading...</span>
+        </div>
+        <div class="data-item">
+            <span class="label">Temperature (°F):</span> <span id="temperature-fahrenheit">Loading...</span>
+        </div>
+        <div class="data-item">
+            <span class="label">Turbidity Status:</span> <span id="turbidity-status">Loading...</span>
+        </div>
+        <div class="data-item">
+            <span class="label">Pressure (hPa):</span> <span id="pressure">Loading...</span>
+        </div>
+        <div class="data-item">
+            <span class="label">Altitude (m):</span> <span id="altitude">Loading...</span>
+        </div>
+        <div class="data-item">
+            <span class="label">TDS (ppm):</span> <span id="tds">Loading...</span>
+        </div>
+        <div class="data-item">
+            <span class="label">Time:</span> <span id="rtc-time">Loading...</span>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
