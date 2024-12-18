@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Sensor Data</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Sensor Data</title>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    #data {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Real-Time Sensor Data</h1>
-    </header>
+  <h1>Real-Time Sensor Data</h1>
+  <div id="data">Loading...</div>
 
-    <div class="data-container" id="sensor-data">
-        <div class="data-item">
-            <span class="label">Temperature (°C):</span> <span id="temperature-celsius">Loading...</span>
-        </div>
-        <div class="data-item">
-            <span class="label">Temperature (°F):</span> <span id="temperature-fahrenheit">Loading...</span>
-        </div>
-        <div class="data-item">
-            <span class="label">Turbidity Status:</span> <span id="turbidity-status">Loading...</span>
-        </div>
-        <div class="data-item">
-            <span class="label">Pressure (hPa):</span> <span id="pressure">Loading...</span>
-        </div>
-        <div class="data-item">
-            <span class="label">Altitude (m):</span> <span id="altitude">Loading...</span>
-        </div>
-        <div class="data-item">
-            <span class="label">TDS (ppm):</span> <span id="tds">Loading...</span>
-        </div>
-        <div class="data-item">
-            <span class="label">Time:</span> <span id="rtc-time">Loading...</span>
-        </div>
-    </div>
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCGH4ElKW0FWUkiyO_gd5aDZD3cLSG9YRY",
+      authDomain: "distance-c8670.firebaseapp.com",
+      databaseURL: "https://distance-c8670-default-rtdb.firebaseio.com",
+      projectId: "distance-c8670",
+      storageBucket: "distance-c8670.appspot.com",
+      messagingSenderId: "540571924866",
+      appId: "1:540571924866:web:3616789d741a7e95c1779b",
+      measurementId: "G-N0P2T0LWKD"
+    };
 
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
-    <script src="script.js"></script>
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.getDatabase(app);
+
+    // Reference to the database location where sensor data is stored
+    const dataRef = firebase.ref(database, 'sensorData');
+
+    // Listening for real-time updates
+    firebase.onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
+      document.getElementById('data').innerText = `Sensor Value: ${data}`;
+    });
+  </script>
 </body>
 </html>
